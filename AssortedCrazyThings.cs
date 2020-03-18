@@ -4,6 +4,7 @@ using AssortedCrazyThings.Items;
 using AssortedCrazyThings.Items.PetAccessories;
 using AssortedCrazyThings.Items.Pets.CuteSlimes;
 using AssortedCrazyThings.Items.Placeable;
+using AssortedCrazyThings.Items.Tools;
 using AssortedCrazyThings.Items.Weapons;
 using AssortedCrazyThings.NPCs.DungeonBird;
 using AssortedCrazyThings.Projectiles.Minions;
@@ -21,6 +22,8 @@ using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using TerrariaOverhaul.Core.Systems.Tags.Groups;
+using TerrariaOverhaul.Utilities.Extensions;
 
 namespace AssortedCrazyThings
 {
@@ -332,6 +335,20 @@ namespace AssortedCrazyThings
             {
                 BossAssistLoadedWithRadar = true;
             }
+
+            Mod overhaul = ModLoader.GetMod("TerrariaOverhaul");
+            if (overhaul != null)
+            {
+                OverhaulCompat();
+            }
+        }
+
+        public static void OverhaulCompat()
+        {
+            ModItem mItem = ModContent.GetModItem(ModContent.ItemType<ExtendoNetRegular>());
+            mItem.SetTag(ItemTags.AllowQuickUse, true);
+            mItem = ModContent.GetModItem(ModContent.ItemType<ExtendoNetGolden>());
+            mItem.SetTag(ItemTags.AllowQuickUse, true);
         }
 
         public override void AddRecipeGroups()

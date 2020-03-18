@@ -13,4 +13,9 @@
   <ItemGroup>
     <None Remove="**\*.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="TerrariaOverhaul">
+      <HintPath>..\..\references\mods\TerrariaOverhaul_v4.3.2.1.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

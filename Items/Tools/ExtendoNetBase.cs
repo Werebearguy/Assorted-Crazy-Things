@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -26,27 +24,6 @@ namespace AssortedCrazyThings.Items.Tools
             return player.ownedProjectileCounts[item.shoot] < 1;
         }
 
-        public void OverhaulInit()
-        {
-            Mod oMod = ModLoader.GetMod("TerrariaOverhaul");
-            if (oMod != null)
-            {
-                try
-                {
-                    Assembly TerrariaOverhaul = oMod.Code;
-                    Type Extensions = TerrariaOverhaul.GetType(oMod.Name + ".Extensions");
-                    MethodInfo SetTag = Extensions.GetMethod("SetTag", new Type[] { typeof(ModItem), typeof(int), typeof(bool) });
-                    Type ItemTags = TerrariaOverhaul.GetType(oMod.Name + ".ItemTags");
-                    FieldInfo AllowQuickUse = ItemTags.GetField("AllowQuickUse", BindingFlags.Static | BindingFlags.Public);
-                    object AllowQuickUseValue = AllowQuickUse.GetValue(null);
-                    SetTag.Invoke(null, new object[] { this, AllowQuickUseValue, true });
-                }
-                catch
-                {
-                    mod.Logger.Warn("Failed to register Overhaul Quick Use feature to Extendo Nets");
-                }
-            }
-            //this.SetTag(ItemTags.AllowQuickUse);
-        }
+        //Overhaul compat handled in PostSetupContent because OverhaulInit() doenst work
     }
 }
